@@ -2,6 +2,7 @@
 @section('content')
     <div class="container">
     <form action="{{ route('file.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow">

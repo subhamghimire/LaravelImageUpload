@@ -38,10 +38,10 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         // file validation
         $validator      =   Validator::make($request->all(),
-            ['filename'      =>   'required|image|2048']);
+            ['filename'      =>   'required|image']);
 
         // if validation fails
         if($validator->fails()) {
@@ -53,13 +53,12 @@ class FileController extends Controller
 
         $name      =   time().time().'.'.$file->getClientOriginalExtension();
 
-        $target_path    =   public_path('/storage/');
+        $target_path    =   public_path('storage');
 
             if($file->move($target_path, $name)) {
-                echo "success";
+                // echo "success";
                 // save file name in the database
                 $file   =   File::create(['filename' => $name]);
-
                 return back()->with("success", "File uploaded successfully");
             }
         }
